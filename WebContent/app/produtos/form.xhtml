@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Produtos</title>
+	<h:outputScript library="js" name="scripts.js"></h:outputScript>
+	<h:outputStylesheet library="css" name="estacio.css" />
+</h:head>
+<h:body>
+
+	<div id="cabecalho">
+		<ui:include src="../templates/cabecalho.xhtml" />
+	</div>
+
+	<div id="barraLogo">
+		<ui:include src="../templates/barraLogo.xhtml" />
+	</div>
+
+	<div id="conteudo">
+
+		<h:form>
+
+			<h:messages />
+
+			<h:panelGrid columns="2">
+
+				<f:facet name="header">Produtos</f:facet>
+
+				<f:facet name="footer">
+					<div align="center">
+						<h:commandButton value="Cancelar"
+							action="#{controleProduto.cancelar()}" immediate="true" />
+						<h:commandButton value="Gravar"
+							action="#{controleProduto.gravar()}" />
+					</div>
+				</f:facet>
+
+				<h:outputLabel value="Código" />
+				<h:inputText value="#{controleProduto.objeto.id}" readonly="true"
+					size="50" />
+
+
+
+
+				<h:outputLabel value="Nome" />
+				<h:inputText value="#{controleProduto.objeto.nome}" maxlength="40"
+					size="50" />
+
+
+
+
+				<h:outputLabel value="Preco" />
+				<h:inputText id="preco" value="#{controleProduto.objeto.preco}"
+					maxlength="40" size="50" onkeydown="Mascara(this,Valor);"
+					onkeyup="Mascara(this,Valor);" onkeypress="Mascara(this,Valor);" />
+
+
+
+				<h:outputLabel value="Quantidade" />
+				<h:inputText value="#{controleProduto.objeto.quantidade}"
+					maxlength="40" size="50" />
+
+				<br />
+				<br />
+
+
+
+
+
+
+				<p:fieldset legend="Categoria:" style="margin-bottom:20px">
+					<h:panelGrid columns="2" cellpadding="5">
+
+
+						<p:selectOneMenu value="#{controleProduto.objeto.categoria}"
+							converter="#{controleProduto.converterCategoria}">
+							<f:selectItem itemLabel="Selecione uma categoria"
+								noSelectionOption="true" />
+							<f:selectItems
+								value="#{controleProduto.daoCategoria.ListarTodos()}" />
+						</p:selectOneMenu>
+
+						<p:commandButton icon="ui-icon-plusthick"
+							action="#{controleNovaCategoria.novo()}" immediate="true" />
+
+					</h:panelGrid>
+				</p:fieldset>
+
+
+
+
+				
+
+			</h:panelGrid>
+		</h:form>
+	</div>
+	<div id="rodape">
+		<ui:include src="../templates/rodape.xhtml" />
+	</div>
+
+</h:body>
+</html>

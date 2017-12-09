@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Itens de Vendas</title>
+	<h:outputScript library="js" name="scripts.js" />
+	<h:outputStylesheet library="css" name="estacio.css" />
+</h:head>
+<h:body>
+
+	<div id="cabecalho">
+		<ui:include src="../templates/cabecalho.xhtml" />
+	</div>
+
+	<div id="barraLogo">
+		<ui:include src="../templates/barraLogo.xhtml" />
+	</div>
+
+	<div id="conteudo">
+
+		<h:form>
+
+			<h:messages />
+
+			<h:panelGrid>
+				<f:facet name="header">Itens de Vendas</f:facet>
+
+				<f:facet name="footer">
+					<div align="center">
+						<h:commandButton value="Cancelar"
+							action="#{controleitensDeVendas.listar()}" immediate="true"/>
+
+						<h:commandButton value="Gravar"
+							action="#{controleitensDeVendas.gravar()}" />
+					</div>
+				</f:facet>
+
+
+				<h:inputHidden value="#{controleitensDeVendas.objeto.id}"
+					readonly="true" />
+				<br />
+
+
+				<h:outputLabel value="Quantidade" />
+				<h:inputText value="#{controleitensDeVendas.objeto.quantidade}"
+					required="campo não pode ser vazio" size="30"/>
+
+				<h:outputLabel value="Valor" />
+				<h:inputText value="#{controleitensDeVendas.objeto.valor}"
+					maxlength="40" size="30" onkeydown="Mascara(this,Valor);"
+					onkeyup="Mascara(this,Valor);" onkeypress="Mascara(this,Valor);" />
+
+
+
+
+
+
+
+
+				<h:outputLabel value="Vendas" />
+				<h:selectOneMenu value="#{controleitensDeVendas.objeto.vendas}"
+					converter="#{controleitensDeVendas.converterVendas}">
+					<f:selectItem itemLabel="Selecione uma Venda"
+						noSelectionOption="true" />
+					<f:selectItems
+						value="#{controleitensDeVendas.daoVendas.ListarTodos()}" />
+				</h:selectOneMenu>
+
+				<h:outputLabel value="Produtos" />
+				<h:selectOneMenu value="#{controleitensDeVendas.objeto.produto}"
+					converter="#{controleitensDeVendas.converterProduto}">
+					<f:selectItem itemLabel="Selecione um produto"
+						noSelectionOption="true" />
+					<f:selectItems value="#{controleProduto.dao.ListarTodos()}" />
+				</h:selectOneMenu>
+
+
+			<br />
+			</h:panelGrid>
+		</h:form>
+	</div>
+	<div id="rodape">
+		<ui:include src="../templates/rodape.xhtml" />
+	</div>
+</h:body>
+</html>

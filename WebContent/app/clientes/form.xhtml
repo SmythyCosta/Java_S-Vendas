@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Área do Clientes</title>
+	<h:outputScript library="js" name="scripts.js" />
+	<h:outputStylesheet library="css" name="estacio.css" />
+</h:head>
+<h:body>
+
+	<div id="cabecalho">
+		<ui:include src="../templates/cabecalho.xhtml" />
+	</div>
+
+	<div id="barraLogo">
+		<ui:include src="../templates/barraLogo.xhtml" />
+	</div>
+
+	<div id="conteudo">
+
+		<h:form>
+
+			<h:messages />
+
+			<h:panelGrid>
+				<f:facet name="header">Clientes</f:facet>
+
+				<f:facet name="footer">
+					<div align="center">
+						<h:commandButton value="Voltar"
+							action="#{controleCliente.listar()}"  immediate="true"/>
+						<h:commandButton value="Gravar"
+							action="#{controleCliente.gravar()}" />
+					</div>
+				</f:facet>
+
+
+				<h:inputHidden value="#{controleCliente.objeto.id}" readonly="true" />
+				<br />
+
+				<h:outputLabel value="Nome" />
+				<h:inputText value="#{controleCliente.objeto.nome}"
+					required="campo não pode ser vazio" size="30"/>
+
+				<h:outputLabel value="CPF" />
+				<h:inputText value="#{controleCliente.objeto.cpf}"
+					required="campo não pode ser vazio" maxlength="14" size="30"
+					onkeydown="Mascara(this,Cpf);" onkeyup="Mascara(this,Cpf);"
+					onkeypress="Mascara(this,Cpf);" />
+
+				<h:outputLabel value="Telefone" />
+				<h:inputText size="30" maxlength="15"
+					value="#{controleCliente.objeto.telefone}"
+					required="campo não pode ser vazio"
+					onkeydown="Mascara(this,Telefone);"
+					onkeyup="Mascara(this,Telefone);"
+					onkeypress="Mascara(this,Telefone);" />
+
+			</h:panelGrid>
+		</h:form>
+	</div>
+	<div id="rodape">
+		<ui:include src="../templates/rodape.xhtml" />
+	</div>
+</h:body>
+</html>

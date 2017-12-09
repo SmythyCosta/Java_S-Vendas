@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Categorias</title>
+	<h:outputStylesheet library="css" name="estacio.css" />
+</h:head>
+<h:body>
+
+	<div id="cabecalho">
+		<ui:include src="../templates/cabecalho.xhtml" />
+	</div>
+	
+	<div id="barraLogo">
+		<ui:include src="../templates/barraLogo.xhtml" />
+	</div>
+
+	<div id="conteudo">
+		<h:form>
+
+			<h:messages />
+
+			<h:panelGrid>
+				<f:facet name="header">Categorias</f:facet>
+
+				<f:facet name="footer">
+					<div align="center">
+						
+						<h:commandButton value="Listar Categorias"
+							action="#{controleCategoria.listar()}" immediate="true" />
+							
+						<h:commandButton value="Gravar"
+							action="#{controleNovaCategoria.gravar()}" />
+							
+	
+							
+					</div>
+				</f:facet>
+
+
+
+				<h:inputHidden value="#{controleNovaCategoria.objeto.id}"
+					readonly="true" />
+
+				<h:outputLabel value="Descrição" />
+				<h:inputText value="#{controleNovaCategoria.objeto.descricao}"
+					required="campo não pode ser vazio" size="30"/>
+				<br />
+			</h:panelGrid>
+		</h:form>
+	</div>
+	<div id="rodape">
+		<ui:include src="../templates/rodape.xhtml" />
+	</div>
+</h:body>
+</html>

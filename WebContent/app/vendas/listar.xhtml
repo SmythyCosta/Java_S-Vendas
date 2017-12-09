@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Vendas</title>
+	<h:outputStylesheet library="css" name="estacio.css" />
+</h:head>
+<h:body>
+
+	<div id="cabecalho">
+		<ui:include src="../templates/cabecalho.xhtml" />
+	</div>
+
+	<div id="barraLateral">
+		<ui:include src="../templates/barraLateral.xhtml" />
+	</div>
+
+	<div id="conteudo">
+	
+		<h3>Vendas</h3>
+		
+		<h:form>
+
+			<p:messages />
+
+			<p:dataTable value="#{controleVendas.dao.ListarTodos()}" var="obj"
+				frame="box" rules="all" cellpadding="3">
+
+				<f:facet name="header">
+					<h:commandButton value="Novo registro"
+						action="#{controleVendas.novo()}" />
+				</f:facet>
+
+				<p:column>
+					<f:facet name="header">ID</f:facet>
+				#{obj.id}
+			</p:column>
+
+				<p:column>
+					<f:facet name="header">Data</f:facet>
+					<h:outputText value="#{obj.data}">
+						<f:converter converterId="converterCalendar" />
+					</h:outputText>
+
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Cliente</f:facet>
+					<h:outputText value="#{obj.clientes.nome}">
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Valor</f:facet>
+				#{obj.valor}
+			</p:column>
+
+				<p:column>
+					<f:facet name="header">Pago</f:facet>
+					<h:outputText value="#{obj.pago == true ? 'Sim' : 'Não'}" />
+				</p:column>
+
+
+
+				<p:column>
+					<f:facet name="header">Alterar</f:facet>
+					<h:commandLink value="Alterar"
+						action="#{controleVendas.alterar(obj)}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Excluir</f:facet>
+					<h:commandLink value="Excluir"
+						action="#{controleVendas.excluir(obj)}"
+						onclick="if (!confirm('Confirmar a exclusão da Venda? ')) return false" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</div>
+	<div id="rodape">
+		<ui:include src="../templates/rodape.xhtml" />
+	</div>
+</h:body>
+</html>
